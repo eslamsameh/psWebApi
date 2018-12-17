@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="psDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="admins">
+    <Key>
+      <PropertyRef Name="adminID" />
+    </Key>
+    <Property Name="adminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="50" />
+    <Property Name="age" Type="int" />
+    <Property Name="phone" Type="int" />
+    <Property Name="address" Type="nvarchar" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="role" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="customerID" />
+    </Key>
+    <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="devices">
+    <Key>
+      <PropertyRef Name="deviceID" />
+    </Key>
+    <Property Name="deviceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="deviceName" Type="nvarchar" MaxLength="50" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="drinks">
+    <Key>
+      <PropertyRef Name="drinkID" />
+    </Key>
+    <Property Name="drinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="haveDiscount" Type="int" />
+    <Property Name="startDiscount" Type="date" />
+    <Property Name="endDiscount" Type="date" />
+    <Property Name="wasPrice" Type="money" />
+    <Property Name="priceAfterDiscount" Type="money" />
+    <Property Name="paymentID" Type="int" />
+    <Property Name="reservationID" Type="int" />
+    <Property Name="drinkNameID" Type="int" />
+  </EntityType>
+  <EntityType Name="drinksName">
+    <Key>
+      <PropertyRef Name="drinkNameID" />
+    </Key>
+    <Property Name="drinkNameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="drinkName" Type="nvarchar" MaxLength="50" />
+    <Property Name="drinkPrice" Type="money" />
+  </EntityType>
+  <EntityType Name="games">
+    <Key>
+      <PropertyRef Name="gameID" />
+    </Key>
+    <Property Name="gameID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="gameName" Type="nvarchar" MaxLength="50" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <EntityType Name="payments">
+    <Key>
+      <PropertyRef Name="paymentID" />
+    </Key>
+    <Property Name="paymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customerID" Type="int" />
+    <Property Name="startTime" Type="datetime" />
+    <Property Name="endTime" Type="datetime" />
+    <Property Name="adminID" Type="int" />
+    <Property Name="gameID" Type="int" />
+    <Property Name="deviceID" Type="int" />
+    <Property Name="amount" Type="money" />
+    <Property Name="haveRemeningAmount" Type="int" />
+    <Property Name="haveDiscount" Type="int" />
+    <Property Name="amountAfterDiscount" Type="money" />
+    <Property Name="amountBeforeDiscount" Type="money" />
+    <Property Name="reviewDiscountFromAdmin" Type="int" />
+    <Property Name="wasAmount" Type="money" />
+    <Property Name="payed" Type="money" />
+    <Property Name="RemeningAmount" Type="money" />
+    <Property Name="date" Type="date" />
+    <Property Name="finished" Type="int" />
+    <Property Name="singleOrMulti" Type="int" />
+  </EntityType>
+  <EntityType Name="playHourPrice">
+    <Key>
+      <PropertyRef Name="playHourePriceID" />
+    </Key>
+    <Property Name="playHourePriceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="hourPlaysSingle" Type="money" />
+    <Property Name="hourPlayMulti" Type="money" />
+  </EntityType>
+  <EntityType Name="reservation">
+    <Key>
+      <PropertyRef Name="reservationID" />
+    </Key>
+    <Property Name="reservationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="date" />
+    <Property Name="startTime" Type="datetime" />
+    <Property Name="endTime" Type="datetime" />
+    <Property Name="adminID" Type="int" />
+    <Property Name="gameID" Type="int" />
+    <Property Name="deviceID" Type="int" />
+    <Property Name="customerID" Type="int" />
+    <Property Name="start" Type="int" />
+    <Property Name="singelOrMulti" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_drinks_drinksName">
+    <End Role="drinksName" Type="Self.drinksName" Multiplicity="0..1" />
+    <End Role="drinks" Type="Self.drinks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="drinksName">
+        <PropertyRef Name="drinkNameID" />
+      </Principal>
+      <Dependent Role="drinks">
+        <PropertyRef Name="drinkNameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_drinks_payments">
+    <End Role="payments" Type="Self.payments" Multiplicity="0..1" />
+    <End Role="drinks" Type="Self.drinks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="payments">
+        <PropertyRef Name="paymentID" />
+      </Principal>
+      <Dependent Role="drinks">
+        <PropertyRef Name="paymentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_payments_admins">
+    <End Role="admins" Type="Self.admins" Multiplicity="0..1" />
+    <End Role="payments" Type="Self.payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="admins">
+        <PropertyRef Name="adminID" />
+      </Principal>
+      <Dependent Role="payments">
+        <PropertyRef Name="adminID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_payments_customers">
+    <End Role="customers" Type="Self.customers" Multiplicity="0..1" />
+    <End Role="payments" Type="Self.payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="payments">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_payments_devices">
+    <End Role="devices" Type="Self.devices" Multiplicity="0..1" />
+    <End Role="payments" Type="Self.payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="devices">
+        <PropertyRef Name="deviceID" />
+      </Principal>
+      <Dependent Role="payments">
+        <PropertyRef Name="deviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_payments_games">
+    <End Role="games" Type="Self.games" Multiplicity="0..1" />
+    <End Role="payments" Type="Self.payments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="games">
+        <PropertyRef Name="gameID" />
+      </Principal>
+      <Dependent Role="payments">
+        <PropertyRef Name="gameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reservation_customers">
+    <End Role="customers" Type="Self.customers" Multiplicity="0..1" />
+    <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="customerID" />
+      </Principal>
+      <Dependent Role="reservation">
+        <PropertyRef Name="customerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_reservation_devices">
+    <End Role="devices" Type="Self.devices" Multiplicity="0..1" />
+    <End Role="reservation" Type="Self.reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="devices">
+        <PropertyRef Name="deviceID" />
+      </Principal>
+      <Dependent Role="reservation">
+        <PropertyRef Name="deviceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="psDataBaseModelStoreContainer">
+    <EntitySet Name="admins" EntityType="Self.admins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customers" EntityType="Self.customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="devices" EntityType="Self.devices" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="drinks" EntityType="Self.drinks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="drinksName" EntityType="Self.drinksName" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="games" EntityType="Self.games" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="payments" EntityType="Self.payments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="playHourPrice" EntityType="Self.playHourPrice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservation" EntityType="Self.reservation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_drinks_drinksName" Association="Self.FK_drinks_drinksName">
+      <End Role="drinksName" EntitySet="drinksName" />
+      <End Role="drinks" EntitySet="drinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_drinks_payments" Association="Self.FK_drinks_payments">
+      <End Role="payments" EntitySet="payments" />
+      <End Role="drinks" EntitySet="drinks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_payments_admins" Association="Self.FK_payments_admins">
+      <End Role="admins" EntitySet="admins" />
+      <End Role="payments" EntitySet="payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_payments_customers" Association="Self.FK_payments_customers">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="payments" EntitySet="payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_payments_devices" Association="Self.FK_payments_devices">
+      <End Role="devices" EntitySet="devices" />
+      <End Role="payments" EntitySet="payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_payments_games" Association="Self.FK_payments_games">
+      <End Role="games" EntitySet="games" />
+      <End Role="payments" EntitySet="payments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reservation_customers" Association="Self.FK_reservation_customers">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="reservation" EntitySet="reservation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_reservation_devices" Association="Self.FK_reservation_devices">
+      <End Role="devices" EntitySet="devices" />
+      <End Role="reservation" EntitySet="reservation" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

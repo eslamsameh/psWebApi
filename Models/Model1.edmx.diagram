@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d5795e282d47449fb45536daa7cd5520" Name="Diagram1">
+        <EntityTypeShape EntityType="psDataBaseModel.admin" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.customer" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.device" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.drink" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.drinksName" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.game" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.payment" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.playHourPrice" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.reservation" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="psDataBaseModel.sysdiagram" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="psDataBaseModel.FK_payments_admins" ManuallyRouted="false" />
+        <AssociationConnector Association="psDataBaseModel.FK_payments_customers" ManuallyRouted="false" />
+        <AssociationConnector Association="psDataBaseModel.FK_reservation_customers" ManuallyRouted="false" />
+        <AssociationConnector Association="psDataBaseModel.FK_payments_devices" ManuallyRouted="false" />
+        <AssociationConnector Association="psDataBaseModel.FK_reservation_devices" ManuallyRouted="false" />
+        <AssociationConnector Association="psDataBaseModel.FK_drinks_drinksName" ManuallyRouted="false" />
+        <AssociationConnector Association="psDataBaseModel.FK_drinks_payments" ManuallyRouted="false" />
+        <AssociationConnector Association="psDataBaseModel.FK_payments_games" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
